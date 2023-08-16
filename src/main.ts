@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const player = new Player(50, 50, 40, 40, 10);
 
-    
+
     let moveLeftKeyPressed = false;
     let moveRightKeyPressed = false;
 
@@ -41,16 +41,18 @@ document.addEventListener('keyup', (event) => {
 });
 
     function gameLoop() {
-        if (ctx) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if ( canvas) {
+            if (ctx) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
             
             if (moveLeftKeyPressed) {
               player.moveLeft();
-          }
-  
-          if (moveRightKeyPressed) {
+           }
+
+           if (moveRightKeyPressed) {
               player.moveRight();
-          }  
+           }
 
             player.update();
             player.dibujar(ctx);
@@ -60,9 +62,9 @@ document.addEventListener('keyup', (event) => {
               // Llamar a la función actualizar para actualizar las propiedades si es necesario
               // plataforma.actualizar();
           });
-      
-           
-        }   
+
+
+        }
         requestAnimationFrame(gameLoop);
     }
 

@@ -16,23 +16,28 @@ export class Plataforma{
         
     }
 
+    getX(): number {
+        return this.x;
+    }
+
+    getY(): number {
+        return this.y;
+    }
+
+    getAncho(): number {
+        return this.ancho;
+    }
+
+    getAlto(): number {
+        return this.altoY;
+    }
+
     dibujar(ctx : CanvasRenderingContext2D | null){
         if (ctx) {
             ctx.fillStyle = 'green';
             ctx.fillRect(this.x,this.y,this.ancho,this.altoY);
         }
     }
-    // actualizar(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
-    //     // if (this.movimientoDerecha) {
-    //     //     this.x += this.velocidad;
-    //     // } else {
-    //     //     this.x -= this.velocidad;
-    //     // }
-
-    //     // if (this.x + this.ancho >= canvas.width || this.x <= 0) {
-    //     //     this.movimientoDerecha = !this.movimientoDerecha;
-    //     // }
-    // }
 }
 
 const arrayPlataformas = [
