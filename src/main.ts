@@ -1,6 +1,7 @@
 import './style.css';
 import { Player } from './clases/Player.clase';
-import {  Plataforma,arrayPlataformas } from './clases/Plataforma.clase';
+import {  arrayPlataformas } from './clases/Plataforma.clase';
+import { Enemigo } from './clases/Enemigo.clase';
 
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.querySelector('canvas');
@@ -40,6 +41,28 @@ document.addEventListener('keyup', (event) => {
     }
 });
 
+
+
+
+
+const enemigos: Enemigo[] = []; // Array para almacenar personajes
+
+// Crear personajes y agregarlos al array
+for (let i = 0; i < 6; i++) {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height;
+    const width = 30;
+    const height = 30;
+    const speed = 2 + Math.random() * 2;
+    const enemigo = new Enemigo(x, y, width, height, speed);
+    enemigos.push(enemigo);
+}
+
+
+
+    // const enemigo = new Enemigo(40,40,20,20,3);
+    // const enemigo2 = new Enemigo(40,40,20,20,3);
+    
     function gameLoop() {
         if ( canvas) {
             if (ctx) {
@@ -54,8 +77,23 @@ document.addEventListener('keyup', (event) => {
               player.moveRight();
            }
 
-            player.update();
-            player.dibujar(ctx);
+           
+            if (ctx !== null) {
+
+                enemigos.forEach(enemigo => {
+                    enemigo.draw(ctx);
+                    enemigo.updatePosition(canvas.width, canvas.height);
+                });
+                // enemigo.draw(ctx);
+                // enemigo2.draw(ctx);
+        
+                // enemigo.updatePosition(canvas.width,canvas.height);
+                // enemigo2.updatePosition(canvas.width,canvas.height);
+                player.update();
+                player.dibujar(ctx);  
+                
+            } 
+            
 
             arrayPlataformas.forEach(plataforma => {
               plataforma.dibujar(ctx);

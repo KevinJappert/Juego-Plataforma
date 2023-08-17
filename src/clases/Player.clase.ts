@@ -75,11 +75,6 @@ export class Player {
     }
 
     
-
-
-
-
-
     dibujar(ctx : CanvasRenderingContext2D | null){
         if (ctx) {
             ctx.fillStyle = 'blue';
