@@ -2,6 +2,8 @@ import './style.css';
 import { Player } from './clases/Player.clase';
 import {  arrayPlataformas } from './clases/Plataforma.clase';
 import { Enemigo } from './clases/Enemigo.clase';
+import { colisionEntreObjetos, reiniciarJuego } from './Utilidades/funciones.utilidades';
+import { MoverJugador } from './Utilidades/direccionTeclas';
 
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.querySelector('canvas');
@@ -18,32 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.height = 600;
 
     const player = new Player(50, 50, 40, 40, 10);
-
-
-    let moveLeftKeyPressed = false;
-    let moveRightKeyPressed = false;
-
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowLeft') {
-        moveLeftKeyPressed = true;
-    } else if (event.key === 'ArrowRight') {
-        moveRightKeyPressed = true;
-    } else if (event.key === 'ArrowUp') {
-        player.jump();
-    }
-});
-
-document.addEventListener('keyup', (event) => {
-    if (event.key === 'ArrowLeft') {
-        moveLeftKeyPressed = false;
-    } else if (event.key === 'ArrowRight') {
-        moveRightKeyPressed = false;
-    }
-});
-
-
-
-
 
 const enemigos: Enemigo[] = []; // Array para almacenar personajes
 
@@ -62,27 +38,25 @@ for (let i = 0; i < 6; i++) {
 
     // const enemigo = new Enemigo(40,40,20,20,3);
     // const enemigo2 = new Enemigo(40,40,20,20,3);
+
+    const direccionJugador = new MoverJugador(player); // Crea una instancia de InputHandler
     
     function gameLoop() {
         if ( canvas) {
             if (ctx) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-            
-            if (moveLeftKeyPressed) {
-              player.moveLeft();
-           }
+            }       
 
-           if (moveRightKeyPressed) {
-              player.moveRight();
-           }
-
-           
             if (ctx !== null) {
 
                 enemigos.forEach(enemigo => {
                     enemigo.draw(ctx);
                     enemigo.updatePosition(canvas.width, canvas.height);
+
+                    //Colision entre jugador y enemigo
+                    if (colisionEntreObjetos(player, enemigo)) {
+                        reiniciarJuego(player, enemigos, canvas);
+                    }
                 });
                 // enemigo.draw(ctx);
                 // enemigo2.draw(ctx);
@@ -101,8 +75,9 @@ for (let i = 0; i < 6; i++) {
               // plataforma.actualizar();
           });
 
-
+          direccionJugador.update()
         }
+        
         requestAnimationFrame(gameLoop);
     }
 

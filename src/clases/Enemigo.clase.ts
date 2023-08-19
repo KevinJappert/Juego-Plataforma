@@ -13,6 +13,11 @@ export class Enemigo {
         this.speed = speed;
     }
 
+    reiniciarPosicion(canvas: HTMLCanvasElement) {
+        this.x = Math.random() * canvas.width; // Nueva posición x aleatoria
+        this.y = Math.random() * canvas.height; // Nueva posición y aleatoria
+    }
+
     draw(ctx: CanvasRenderingContext2D) {
         ctx.fillStyle = 'blue';
         ctx.fillRect(this.x, this.y, this.width, this.height);

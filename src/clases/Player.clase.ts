@@ -18,9 +18,16 @@ export class Player {
         this.yVelocity = 0;
         this.isJumping = false;
     }
+
+    reiniciarPosicion() {
+        this.x = 50; // Valores iniciales de posición
+        this.y = 50; // Valores iniciales de posición
+        this.yVelocity = 0; // Restablecer la velocidad vertical
+        this.isJumping = false; // Restablecer la bandera de salto
+    }
     
-       // Asegurarse de que el jugador no se salga del canvas
-       moveLeft() {
+    // Asegurarse de que el jugador no se salga del canvas
+    moveLeft() {
         if (this.x > 0) {
             this.x -= this.speed;
         }
@@ -32,14 +39,11 @@ export class Player {
         }
     }
 
-    // getPosition() {
-    //     return { x: this.x, y: this.y };
-    // }
-
     jump() {
         if (!this.isJumping) {
             this.yVelocity = -10; // Aplicar un impulso hacia arriba
-            this.isJumping = true;
+            this.isJumping = true
+            // this.isJumping = true;
         }
     }
 
@@ -52,7 +56,8 @@ export class Player {
         // Restringir el jugador para que no caiga por debajo del suelo
         if (this.y + this.altoY > 600) {
             this.yVelocity = 0;
-            this.isJumping = false;
+            this.isJumping = false
+            // this.isJumping = false;
             this.y = 600 - this.altoY; // Asegurarse de que el jugador no caiga por debajo del suelo
         }
 
@@ -67,7 +72,8 @@ export class Player {
                 ) {
                     // El jugador está encima de una plataforma, restablecer posición y velocidad vertical
                     this.yVelocity = 0;
-                    this.isJumping = false;
+                    this.isJumping = false
+                    // this.isJumping = false;
                     this.y = plataforma.getY() - this.altoY; // Alinear el jugador con la parte superior de la plataforma
                 }
             });
