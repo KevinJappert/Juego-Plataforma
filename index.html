@@ -1,16 +1,32 @@
 <!doctype html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS + Juego Plataforma</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + TS + Juego Plataforma</title>
+</head>
 
-  <body>
+<body>
+
+  <div class="button-container">
     <canvas id="mi-canvas">Tu navegador no acepta canvas</canvas>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+    <button class="reset-button">
+      Reiniciar
+    </button>
+    <button class="reset-button">
+      Comenzar
+    </button>
+    <button class="reset-button">
+      Pausar
+    </button>
+
+  </div>
+
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
 
 </html>
