@@ -52,11 +52,12 @@ export class Player {
     }
 
     jump() {
-        if (!this.isJumping) {
+        if (!this.isJumping || this.y + this.altoY === 600) { // Verifica si el jugador está en el suelo
             this.yVelocity = -10; // Aplicar un impulso hacia arriba
-            this.isJumping = true
+            this.isJumping = true;
         }
     }
+    
 
     applyGravity() {
         this.yVelocity += 0.3; // Incrementar la velocidad vertical debido a la gravedad
@@ -71,22 +72,33 @@ export class Player {
         }
 
 
-        // Verificar colisiones con las plataformas
         arrayPlataformas.forEach(plataforma => {
             if (
-                this.y + this.altoY >= plataforma.getY() && // Colisión vertical
-                this.y < plataforma.getY() + plataforma.getAlto() && // Colisión vertical
+                this.y + this.altoY >= plataforma.getY() && // Colisión vertical (parte inferior del jugador)
+                this.y < plataforma.getY() + plataforma.getAlto() && // Colisión vertical (parte superior del jugador)
                 this.x + this.anchoX > plataforma.getX() && // Colisión horizontal (lado derecho del jugador)
                 this.x < plataforma.getX() + plataforma.getAncho() // Colisión horizontal (lado izquierdo del jugador)
             ) {
-                // El jugador está encima de una plataforma, restablecer posición y velocidad vertical
-                this.yVelocity = 0;
-                this.isJumping = false
-                // this.isJumping = false;
-                this.y = plataforma.getY() - this.altoY; // Alinear el jugador con la parte superior de la plataforma
+                if (this.yVelocity > 0) {
+                    // El jugador está cayendo y colisiona con la plataforma desde abajo
+                    this.yVelocity = 0;
+                    this.isJumping = false;
+                    this.y = plataforma.getY() - this.altoY; // Alinear el jugador con la parte superior de la plataforma
+                } else if (this.yVelocity < 0) {
+                    // El jugador está saltando hacia arriba, pero colisiona con la plataforma
+                    // Detén el salto y cambia la dirección de la velocidad vertical para hacerlo caer
+                    this.yVelocity = 0;
+                    this.isJumping = false;
+                    this.y = plataforma.getY() + plataforma.getAlto(); // Alinear el jugador con la parte inferior de la plataforma
+                } else {
+                    // El jugador está encima de la plataforma
+                    this.yVelocity = 0;
+                    this.isJumping = false;
+                    this.y = plataforma.getY() - this.altoY; // Alinear el jugador con la parte superior de la plataforma
+                }
             }
         });
-
+        
     }
 
 

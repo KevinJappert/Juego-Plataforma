@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const enemigos: Enemigo[] = []; // Array para almacenar personajes
 
     // Crear personajes y agregarlos al array
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
         const x = Math.random() * canvas.width;
         const y = Math.random() * canvas.height;
         const width = 30;
