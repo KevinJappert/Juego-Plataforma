@@ -1,14 +1,14 @@
 import { Player } from '../clases/Player.clase';
 
 export class MoverJugador {
-    private player: Player;
-    private moveLeftKeyPressed: boolean;
-    private moveRightKeyPressed: boolean;
+    private jugador: Player;
+    private moverIzquierdaPresionado: boolean;
+    private moverDerechaPresionado: boolean;
 
-    constructor(player: Player) {
-        this.player = player;
-        this.moveLeftKeyPressed = false;
-        this.moveRightKeyPressed = false;
+    constructor(jugador: Player) {
+        this.jugador = jugador;
+        this.moverIzquierdaPresionado = false;
+        this.moverDerechaPresionado = false;
 
         document.addEventListener('keydown', this.teclaAbajo.bind(this));
         document.addEventListener('keyup', this.teclaArriba.bind(this));
@@ -16,29 +16,29 @@ export class MoverJugador {
 
     private teclaAbajo(event: KeyboardEvent) {
         if (event.key === 'ArrowLeft') {
-            this.moveLeftKeyPressed = true;
+            this.moverIzquierdaPresionado = true;
         } else if (event.key === 'ArrowRight') {
-            this.moveRightKeyPressed = true;
+            this.moverDerechaPresionado = true;
         } else if (event.key === 'ArrowUp') {
-            this.player.metodoSalto(); // Llamar al método de salto del jugador
+            this.jugador.metodoSalto(); // Llamar al método de salto del jugador
         }
     }
 
     private teclaArriba(event: KeyboardEvent) {
         if (event.key === 'ArrowLeft') {
-            this.moveLeftKeyPressed = false;
+            this.moverIzquierdaPresionado = false;
         } else if (event.key === 'ArrowRight') {
-            this.moveRightKeyPressed = false;
+            this.moverDerechaPresionado = false;
         }
     }
 
     public cargar() {
-        if (this.moveLeftKeyPressed) {
-            this.player.moverIzquierda();
+        if (this.moverIzquierdaPresionado) {
+            this.jugador.moverIzquierda();
         }
 
-        if (this.moveRightKeyPressed) {
-            this.player.moverDerecha();
+        if (this.moverDerechaPresionado) {
+            this.jugador.moverDerecha();
         }
     }
 }

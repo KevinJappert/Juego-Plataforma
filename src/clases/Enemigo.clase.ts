@@ -1,26 +1,26 @@
 export class Enemigo {
-    private x: number;
-    private y: number;
+    private posicionEnX: number;
+    private posicionEnY: number;
     private ancho: number;
     private alto: number;
     private velocidad: number;
 
-    constructor(x: number, y: number, width: number, height: number, speed: number) {
-        this.x = x;
-        this.y = y;
+    constructor(posicionEnX: number, posicionEnY: number, width: number, height: number, speed: number) {
+        this.posicionEnX = posicionEnX;
+        this.posicionEnY = posicionEnY;
         this.ancho = width;
         this.alto = height;
         this.velocidad = speed;
     }
 
     reiniciarPosicion(canvas: HTMLCanvasElement) {
-        this.x = Math.random() * canvas.width; // Nueva posición x aleatoria
-        this.y = Math.random() * canvas.height; // Nueva posición y aleatoria
+        this.posicionEnX = Math.random() * canvas.width; // Nueva posición x aleatoria
+        this.posicionEnY = Math.random() * canvas.height; // Nueva posición y aleatoria
     }
 
     dibujar(ctx: CanvasRenderingContext2D) {
         ctx.fillStyle = 'blue';
-        ctx.fillRect(this.x, this.y, this.ancho, this.alto);
+        ctx.fillRect(this.posicionEnX, this.posicionEnY, this.ancho, this.alto);
     }
 
     traerAnchoEnemigo(): number {
@@ -30,29 +30,29 @@ export class Enemigo {
         return this.alto;
     }
     traerXEnemigo(): number {
-        return this.x;
+        return this.posicionEnX;
     }
     traerYEnemigo(): number {
-        return this.y;
+        return this.posicionEnY;
     }
 
     cargarPosicion(canvasWidth: number, canvasHeight: number) {
         // Generar un cambio de posición aleatorio
-        this.x += this.velocidad * (Math.random() < 0.5 ? -1 : 1);
-        this.y += this.velocidad * (Math.random() < 0.5 ? -1 : 1);
+        this.posicionEnX += this.velocidad * (Math.random() < 0.5 ? -1 : 1);
+        this.posicionEnY += this.velocidad * (Math.random() < 0.5 ? -1 : 1);
 
         // Mantener al personaje dentro de los límites del canvas
-        if (this.x + this.ancho > canvasWidth) {
-            this.x = canvasWidth - this.ancho;
+        if (this.posicionEnX + this.ancho > canvasWidth) {
+            this.posicionEnX = canvasWidth - this.ancho;
         }
-        if (this.x < 0) {
-            this.x = 0;
+        if (this.posicionEnX < 0) {
+            this.posicionEnX = 0;
         }
-        if (this.y + this.alto > canvasHeight) {
-            this.y = canvasHeight - this.alto;
+        if (this.posicionEnY + this.alto > canvasHeight) {
+            this.posicionEnY = canvasHeight - this.alto;
         }
-        if (this.y < 0) {
-            this.y = 0;
+        if (this.posicionEnY < 0) {
+            this.posicionEnY = 0;
         }
     }
 }

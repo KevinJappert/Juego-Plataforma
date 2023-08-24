@@ -1,24 +1,24 @@
 export class Plataforma {
-    private x: number;
-    private y: number;
+    private posicionEnX: number;
+    private posicionEnY: number;
     private ancho: number;
     private altoY: number;
 
-    constructor(x: number, y: number, ancho: number, altoY: number) {
+    constructor(posicionEnX: number, posicionEnY: number, ancho: number, altoY: number) {
         //Esta parte mas adelante la podemos poner como herencia
-        this.x = x;
-        this.y = y;
+        this.posicionEnX = posicionEnX;
+        this.posicionEnY = posicionEnY;
         this.ancho = ancho;
         this.altoY = altoY;
 
     }
 
     traerX(): number {
-        return this.x;
+        return this.posicionEnX;
     }
 
     traerY(): number {
-        return this.y;
+        return this.posicionEnY;
     }
 
     traerAncho(): number {
@@ -32,7 +32,7 @@ export class Plataforma {
     dibujar(ctx: CanvasRenderingContext2D | null) {
         if (ctx) {
             ctx.fillStyle = 'green';
-            ctx.fillRect(this.x, this.y, this.ancho, this.altoY);
+            ctx.fillRect(this.posicionEnX, this.posicionEnY, this.ancho, this.altoY);
         }
     }
 }
