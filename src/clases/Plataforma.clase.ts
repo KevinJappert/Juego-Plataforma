@@ -1,4 +1,3 @@
-
 export class Plataforma {
     private x: number;
     private y: number;
@@ -14,19 +13,19 @@ export class Plataforma {
 
     }
 
-    getX(): number {
+    traerX(): number {
         return this.x;
     }
 
-    getY(): number {
+    traerY(): number {
         return this.y;
     }
 
-    getAncho(): number {
+    traerAncho(): number {
         return this.ancho;
     }
 
-    getAlto(): number {
+    traerAlto(): number {
         return this.altoY;
     }
 

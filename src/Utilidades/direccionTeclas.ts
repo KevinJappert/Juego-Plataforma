@@ -10,21 +10,21 @@ export class MoverJugador {
         this.moveLeftKeyPressed = false;
         this.moveRightKeyPressed = false;
 
-        document.addEventListener('keydown', this.handleKeyDown.bind(this));
-        document.addEventListener('keyup', this.handleKeyUp.bind(this));
+        document.addEventListener('keydown', this.teclaAbajo.bind(this));
+        document.addEventListener('keyup', this.teclaArriba.bind(this));
     }
 
-    private handleKeyDown(event: KeyboardEvent) {
+    private teclaAbajo(event: KeyboardEvent) {
         if (event.key === 'ArrowLeft') {
             this.moveLeftKeyPressed = true;
         } else if (event.key === 'ArrowRight') {
             this.moveRightKeyPressed = true;
         } else if (event.key === 'ArrowUp') {
-            this.player.jump(); // Llamar al método de salto del jugador
+            this.player.metodoSalto(); // Llamar al método de salto del jugador
         }
     }
 
-    private handleKeyUp(event: KeyboardEvent) {
+    private teclaArriba(event: KeyboardEvent) {
         if (event.key === 'ArrowLeft') {
             this.moveLeftKeyPressed = false;
         } else if (event.key === 'ArrowRight') {
@@ -32,13 +32,13 @@ export class MoverJugador {
         }
     }
 
-    public update() {
+    public cargar() {
         if (this.moveLeftKeyPressed) {
-            this.player.moveLeft();
+            this.player.moverIzquierda();
         }
 
         if (this.moveRightKeyPressed) {
-            this.player.moveRight();
+            this.player.moverDerecha();
         }
     }
 }

@@ -3,13 +3,14 @@ import { Player } from "../clases/Player.clase";
 import { Enemigo } from "../clases/Enemigo.clase";
 
 // Función para detectar colisiones entre dos objetos rectangulares
-export function colisionEntreObjetos(player: any, enemigo: any): boolean {
+export function colisionEntreObjetos(player: Player, enemigo: Enemigo): boolean {
     return (
-        player.x < enemigo.x + enemigo.width &&
-        player.x + player.anchoX > enemigo.x &&
-        player.y < enemigo.y + enemigo.height &&
-        player.y + player.altoY > enemigo.y
+        player.traerX() < enemigo.traerXEnemigo() + enemigo.traerAnchoEnemigo() &&
+        player.traerX() + player.traerAncho() > enemigo.traerXEnemigo() &&
+        player.traerY() < enemigo.traerYEnemigo() + enemigo.traerAltoEnemigo() &&
+        player.traerY() + player.traerAlto() > enemigo.traerYEnemigo()
     );
+    
 }
 
 // Función para reiniciar el juego

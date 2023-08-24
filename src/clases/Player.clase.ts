@@ -5,62 +5,70 @@ export class Player {
     private y: number;
     private anchoX: number;
     private altoY: number;
-    private speed: number;
+    private velocidadPlayer: number;
     private yVelocity: number; // Velocidad vertical para la gravedad
-    private isJumping: boolean; // Bandera para controlar si está saltando
+    private salto: boolean; // Bandera para controlar si está saltando
 
     constructor(x: number, y: number, anchoX: number, altoY: number, speed: number) {
         this.x = x;
         this.y = y;
         this.anchoX = anchoX;
         this.altoY = altoY;
-        this.speed = speed;
+        this.velocidadPlayer = speed;
         this.yVelocity = 0;
-        this.isJumping = false;
+        this.salto = false;
     }
 
-    getY(): number {
+    traerY(): number {
         return this.y;
     }
 
-    getAlto(): number {
+    traerAlto(): number {
         return this.altoY;
     }
 
-    getX(): number {
+    traerX(): number {
         return this.x
+    }
+
+    traerAncho(): number {
+        return this.anchoX;
+    }
+
+    traerVelocidadY(): number {
+        return this.yVelocity;
     }
 
     reiniciarPosicion() {
         this.x = 50; // Valores iniciales de posición
         this.y = 50; // Valores iniciales de posición
         this.yVelocity = 0; // Restablecer la velocidad vertical
-        this.isJumping = false; // Restablecer la bandera de salto
+        this.salto = false; // Restablecer la bandera de salto
     }
 
     // Asegurarse de que el jugador no se salga del canvas
-    moveLeft() {
+    moverIzquierda() {
         if (this.x > 0) {
-            this.x -= this.speed;
+            this.x -= this.velocidadPlayer;
         }
     }
 
-    moveRight() {
+    moverDerecha() {
         if (this.x + this.anchoX < 800) { // Ancho del canvas
-            this.x += this.speed;
+            this.x += this.velocidadPlayer;
         }
     }
 
-    jump() {
-        if (!this.isJumping || this.y + this.altoY === 600) { // Verifica si el jugador está en el suelo
+    metodoSalto() {
+        if (!this.salto || this.y + this.altoY === 600) { // Verifica si el jugador está en el suelo
             this.yVelocity = -10; // Aplicar un impulso hacia arriba
-            this.isJumping = true;
+            this.salto = true;
         }
     }
     
 
-    applyGravity() {
-        this.yVelocity += 0.3; // Incrementar la velocidad vertical debido a la gravedad
+    aplicarGravedad() {
+        this.yVelocity += 0.4; // Incrementar la velocidad vertical debido a la gravedad
 
         // Actualizar la posición vertical
         this.y += this.yVelocity;
@@ -74,27 +82,27 @@ export class Player {
 
         arrayPlataformas.forEach(plataforma => {
             if (
-                this.y + this.altoY >= plataforma.getY() && // Colisión vertical (parte inferior del jugador)
-                this.y < plataforma.getY() + plataforma.getAlto() && // Colisión vertical (parte superior del jugador)
-                this.x + this.anchoX > plataforma.getX() && // Colisión horizontal (lado derecho del jugador)
-                this.x < plataforma.getX() + plataforma.getAncho() // Colisión horizontal (lado izquierdo del jugador)
+                this.y + this.altoY >= plataforma.traerY() && // Colisión vertical (parte inferior del jugador)
+                this.y < plataforma.traerY() + plataforma.traerAlto() && // Colisión vertical (parte superior del jugador)
+                this.x + this.anchoX > plataforma.traerX() && // Colisión horizontal (lado derecho del jugador)
+                this.x < plataforma.traerX() + plataforma.traerAncho() // Colisión horizontal (lado izquierdo del jugador)
             ) {
                 if (this.yVelocity > 0) {
                     // El jugador está cayendo y colisiona con la plataforma desde abajo
                     this.yVelocity = 0;
-                    this.isJumping = false;
-                    this.y = plataforma.getY() - this.altoY; // Alinear el jugador con la parte superior de la plataforma
+                    this.salto = false;
+                    this.y = plataforma.traerY() - this.altoY; // Alinear el jugador con la parte superior de la plataforma
                 } else if (this.yVelocity < 0) {
                     // El jugador está saltando hacia arriba, pero colisiona con la plataforma
                     // Detén el salto y cambia la dirección de la velocidad vertical para hacerlo caer
                     this.yVelocity = 0;
-                    this.isJumping = false;
-                    this.y = plataforma.getY() + plataforma.getAlto(); // Alinear el jugador con la parte inferior de la plataforma
+                    this.salto = false;
+                    this.y = plataforma.traerY() + plataforma.traerAlto(); // Alinear el jugador con la parte inferior de la plataforma
                 } else {
                     // El jugador está encima de la plataforma
                     this.yVelocity = 0;
-                    this.isJumping = false;
-                    this.y = plataforma.getY() - this.altoY; // Alinear el jugador con la parte superior de la plataforma
+                    this.salto = false;
+                    this.y = plataforma.traerY() - this.altoY; // Alinear el jugador con la parte superior de la plataforma
                 }
             }
         });
@@ -110,13 +118,13 @@ export class Player {
     }
 
     detenerjugador() {
-        this.speed = 0;
+        this.velocidadPlayer = 0;
     }
 
 
-    update() {
+    cargar() {
 
-        this.applyGravity(); // Llamada en cada actualización para aplicar la gravedad
+        this.aplicarGravedad(); // Llamada en cada actualización para aplicar la gravedad
     }
 
 }
