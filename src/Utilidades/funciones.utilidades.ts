@@ -14,9 +14,10 @@ export function colisionEntreObjetos(player: Player, enemigo: Enemigo): boolean 
 }
 
 // Función para reiniciar el juego
-export function reiniciarJuego(player: Player, enemigos: Enemigo[], canvas: HTMLCanvasElement): void {
+export function reiniciarJuego(jugador: Player, enemigos: Enemigo[], canvas: HTMLCanvasElement): void {
     // Reiniciar la posición del jugador
-    player.reiniciarPosicion();
+    jugador.reiniciarPosicion();
+    
 
     // Reiniciar la posición de los enemigos
     enemigos.forEach(enemigo => {
