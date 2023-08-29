@@ -41,13 +41,13 @@ export class Jugador {
     }
 
     moverDerecha(){
-        if (this.posicionEnX + this.anchoX < 800) {
+        if (this.posicionEnX + this.anchoX < 1000) {
             this.posicionEnX += this.velocidad;
         }
     }
 
     moverSalto(){
-        if (!this.salto || this.posicionEnY + this.altoY === 600) {
+        if (!this.salto || this.posicionEnY + this.altoY === 800) {
             this.velocidadYDelSalto = -10
             this.salto = true //si dejo en false aca tengo saltos ilimitados
         }
@@ -73,9 +73,9 @@ export class Jugador {
         this.posicionEnY += this.velocidadYDelSalto; //Actualiza la posicion vertical
 
              // Restringir el jugador para que no caiga por debajo del suelo
-             if (this.posicionEnY + this.altoY > 600) {
+             if (this.posicionEnY + this.altoY > 800) {
                 this.velocidadYDelSalto = 0;
-                this.posicionEnY = 600 - this.altoY; // Asegurarse de que el jugador no caiga por debajo del suelo
+                this.posicionEnY = 800 - this.altoY; // Asegurarse de que el jugador no caiga por debajo del suelo
             }
             arrayPlataforma.forEach(plataforma => {
                 if (

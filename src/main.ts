@@ -5,9 +5,10 @@ import { MoverJugador } from './Clases/moverJugador.clases';
 import { generarPlataformas, generarEnemigos, dibujarEnemigos} from './Utiles/generarElementos.utiles';
 import { estadoJuego } from './Utiles/estadoJuego.utiles';
 import { agregarManejadoresDeEventos } from './Eventos/clicks.eventos';
+import { chequearVictoria, mostrarVentanaDeVictoria } from './Utiles/chequearVictoria.utiles';
 
 //Iniciar Canvas y su Contexto
-const canvas = iniciarCanvas.iniciar(800 , 600);
+const canvas = iniciarCanvas.iniciar(1000 , 800);
 const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
 //Creamos el jugador
@@ -22,9 +23,10 @@ const direccionJugador = new MoverJugador(jugador1);
 // Agregar manejadores de eventos (pausa, reinicio)
 agregarManejadoresDeEventos();
 
+
 //Funcion principal
 function correrJuego(){
-if (!estadoJuego.estaEnPausa) {
+if (!estadoJuego.estaEnPausa ) {
   
   if (canvas && ctx) {
     //Limpiamos canvas
@@ -36,6 +38,13 @@ if (!estadoJuego.estaEnPausa) {
     //Dibujamos enemigos y comprobamos colisiones
     dibujarEnemigos(ctx, enemigos, jugador1, canvas)
 
+    //Chequear Win
+    const haGanado = chequearVictoria(jugador1,canvas); //Retorna la posicion
+    if (haGanado) {
+      mostrarVentanaDeVictoria(ctx ,canvas);
+      return; //Detiene el bucle
+    }
+
     //Cargar movimiento del jugador
     direccionJugador.cargar()
 
@@ -45,7 +54,8 @@ if (!estadoJuego.estaEnPausa) {
 
   }
 } 
-  requestAnimationFrame(correrJuego);
+requestAnimationFrame(correrJuego);
+console.log(requestAnimationFrame)
 }
 
 correrJuego();

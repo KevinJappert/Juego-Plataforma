@@ -2,7 +2,7 @@
 import { Jugador } from '../Clases/jugador.clase';
 import { Enemigo } from '../Clases/enemigo.clases';
 import {  arrayPlataforma } from '../Clases/plataforma.clases';
-import { colisionEntreObjetos, reiniciarJuego } from '../Utiles/funciones.utiles';
+import { colisionEntreObjetos, reiniciarJuego } from './funcionColision-ReiniciarJuego.utiles';
 
 export function dibujarEnemigos(ctx: CanvasRenderingContext2D, enemigos: Enemigo[], jugador: Jugador, canvas: HTMLCanvasElement) {
     enemigos.forEach(enemigo => {

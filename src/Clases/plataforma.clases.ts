@@ -34,7 +34,9 @@ export class Plataforma {
     
     const arrayPlataforma = [
         new Plataforma(0,250,700,10),
-        new Plataforma(120,350,500,10)
+        new Plataforma(120,350,500,10),
+        new Plataforma(320,550,450,10),
+        new Plataforma(520,650,550,10)
     ]
     
     export{
