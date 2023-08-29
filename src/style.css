@@ -9,6 +9,22 @@ html {
   align-items: center;
 }
 
+.canvas-container {
+  position: relative;
+}
+
+.button-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+  padding: 120px;
+}
+
+
 canvas {
   background-color: rgb(27, 32, 31);
   border: 2px solid #333;
@@ -24,8 +40,6 @@ button {
   margin-left: 10px;
   width: 10em;
   position: relative;
-  top: -668px;
-  left: 150px;
   height: 3.5em;
   border: 3px ridge #149CEA;
   outline: none;

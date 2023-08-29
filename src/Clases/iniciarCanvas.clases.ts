@@ -1,6 +1,6 @@
 export class iniciarCanvas {
 
-    static initCanvas( width: number, height: number): HTMLCanvasElement {
+    static iniciar( anchoX: number, altoY: number): HTMLCanvasElement {
         const canvas = document.querySelector('#mi-canvas') as HTMLCanvasElement;
         if (!canvas) {  
             throw new Error('Canvas element not found');
@@ -11,8 +11,8 @@ export class iniciarCanvas {
             throw new Error('2D context not supported');
         }
 
-        canvas.width = width;
-        canvas.height = height;
+        canvas.width = anchoX;
+        canvas.height = altoY;
 
         return canvas;
     }

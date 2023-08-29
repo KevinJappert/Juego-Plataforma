@@ -1,5 +1,5 @@
-import { startGameLoop, estadoJuego } from '../Utilidades/estadoJuego.utilidades';
-import { jugador } from '../main'; // Importar jugador directamente
+import { comenzarJuego , estadoJuego } from '../Utiles/estadoJuego.utiles';
+import { jugador1 } from '../main'; // Importar jugador directamente
 
 // Función para agregar manejadores de eventos
 export function agregarManejadoresDeEventos() {
@@ -8,14 +8,14 @@ export function agregarManejadoresDeEventos() {
 
     // Agregar un oyente de eventos al botón de pausa
     pausarBtn.addEventListener('click', () => {
-        if (!estadoJuego.isPaused) {
+        if (!estadoJuego.estaEnPausa) {
             // Si el juego no está en pausa, pausarlo y guardar el tiempo de pausa
-            estadoJuego.isPaused = true;
-            estadoJuego.pauseTime = performance.now() - estadoJuego.lastTimestamp;
+            estadoJuego.estaEnPausa = true;
+            estadoJuego.tiempoPausa = performance.now() - estadoJuego.ultimaMarcaTiempo;
         } else {
             // Si el juego está en pausa, reanudarlo y ajustar el tiempo de inicio del bucle
-            estadoJuego.isPaused = false;
-            startGameLoop(performance.now() - estadoJuego.pauseTime);
+            estadoJuego.estaEnPausa = false;
+            comenzarJuego(performance.now() - estadoJuego.tiempoPausa);
         }
     });
 
@@ -25,24 +25,24 @@ export function agregarManejadoresDeEventos() {
     // Agregar un oyente de eventos al botón de reinicio
     reiniciarBtn.addEventListener('click', () => {
         // Reiniciar la posición del jugador al hacer clic en el botón de reinicio
-        jugador.reiniciarPosicion();
+        jugador1.reiniciarPosicion();
     });
 
     // Agregar un oyente de eventos para cuando la ventana pierde el enfoque (blur)
     window.addEventListener('blur', () => {
         // Pausar el juego y guardar el momento en que se pausó
-        estadoJuego.isPaused = true;
-        estadoJuego.pauseTime = performance.now();
+        estadoJuego.estaEnPausa = true;
+        estadoJuego.tiempoPausa = performance.now();
     });
 
     // Agregar un oyente de eventos para cuando la ventana recupera el enfoque (focus)
     window.addEventListener('focus', () => {
-        if (estadoJuego.isPaused) {
+        if (estadoJuego.estaEnPausa) {
             // Si el juego estaba en pausa, reanudarlo y ajustar el tiempo de inicio del bucle
             const currentTime = performance.now();
-            estadoJuego.pauseTime = currentTime - estadoJuego.pauseTime; // Calcular el tiempo acumulado de pausa
-            estadoJuego.isPaused = false;
-            startGameLoop(currentTime); // Pasar el tiempo actual al reiniciar el bucle
+            estadoJuego.tiempoPausa = currentTime - estadoJuego.tiempoPausa; // Calcular el tiempo acumulado de pausa
+            estadoJuego.estaEnPausa = false;
+            comenzarJuego(currentTime); // Pasar el tiempo actual al reiniciar el bucle
         }
     });
 }

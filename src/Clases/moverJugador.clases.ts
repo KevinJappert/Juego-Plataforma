@@ -1,12 +1,11 @@
-import { Player } from '../clases/Player.clase';
+import { Jugador } from "./jugador.clase";
 
-// Clase para manejar el movimiento del jugador
 export class MoverJugador {
-    private jugador: Player;
+    private jugador: Jugador;
     private moverIzquierdaPresionado: boolean;
     private moverDerechaPresionado: boolean;
 
-    constructor(jugador: Player) {
+    constructor(jugador: Jugador) {
         // Inicializar el objeto MoverJugador con el jugador proporcionado y banderas de movimiento
         this.jugador = jugador;
         this.moverIzquierdaPresionado = false;
@@ -24,7 +23,7 @@ export class MoverJugador {
         } else if (event.key === 'ArrowRight') {
             this.moverDerechaPresionado = true;
         } else if (event.key === 'ArrowUp') {
-            this.jugador.metodoSalto(); // Llamar al método de salto del jugador cuando se presiona la tecla de flecha arriba
+            this.jugador.moverSalto(); // Llamar al método de salto del jugador cuando se presiona la tecla de flecha arriba
         }
     }
 
@@ -39,11 +38,11 @@ export class MoverJugador {
 
     // Método para actualizar el movimiento del jugador
     public cargar() {
-        if (this.moverIzquierdaPresionado) {
+         if (this.moverIzquierdaPresionado) {
             this.jugador.moverIzquierda(); // Mover el jugador hacia la izquierda si la tecla izquierda está presionada
-        }
-
-        if (this.moverDerechaPresionado) {
+         }
+    
+         if (this.moverDerechaPresionado) {
             this.jugador.moverDerecha(); // Mover el jugador hacia la derecha si la tecla derecha está presionada
         }
     }
