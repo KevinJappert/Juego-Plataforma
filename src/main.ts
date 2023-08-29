@@ -8,7 +8,7 @@ import { agregarManejadoresDeEventos } from './Eventos/clicks.eventos';
 import { chequearVictoria, mostrarVentanaDeVictoria } from './Utiles/chequearVictoria.utiles';
 
 //Iniciar Canvas y su Contexto
-const canvas = iniciarCanvas.iniciar(1000 , 800);
+const canvas = iniciarCanvas.iniciar(window.innerWidth , window.innerHeight);
 const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 
 //Creamos el jugador
